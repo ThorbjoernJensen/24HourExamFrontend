@@ -2,15 +2,22 @@ import React, {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 
 import Table from 'react-bootstrap/Table';
+import {Link} from "react-router-dom";
 
 function Conferences({conferences, onGetConferences}) {
-
+    const [conference, setConference] = useState({});
     useEffect(() => {
         onGetConferences();
 
     }, []);
     console.log(conferences);
 
+    function onSetConference(conference) {
+        // console.log("conferenceid vi sender med")
+        // console.log(conference.id)
+        // setConference(conference);
+        console.log(conference)
+    };
 
     return (
         <div className="mainContent">
@@ -26,25 +33,34 @@ function Conferences({conferences, onGetConferences}) {
                 </thead>
                 <tbody>
                 {conferences.length > 0
-                    ? (conferences.map((conference) => (
+                    ? (conferences.map((conference) =>
+                        (
+                            <tr key={conference.id}>
+                                <td>{conference.id}</td>
+                                <td>{conference.name}</td>
 
-                        <tr key={conference.id}>
-                            <td>{conference.id}</td>
-                            <td>{conference.name}</td>
-                            <td>{conference.location}</td>
-                            <td>{conference.capacity}</td>
-                            <td>{conference.date}</td>
-                            <td>{conference.time}</td>
-                            {/*<td>*/}
-                            {/*    <button className="btn btn-danger " type="submit" name="delete"*/}
-                            {/*            value="${orderItem.order_id}">Slet*/}
-                            {/*    </button>*/}
-                            {/*</td>*/}
-                        </tr>)))
+
+                                <td>{conference.location}</td>
+                                <td>{conference.capacity}</td>
+                                <td>{conference.date}</td>
+                                <td>{conference.time}</td>
+                                <td><Link key={conference.id} to={"/conferenceinfo/" + conference.id}
+                                          state={{data: conference}}>
+                                    Info
+                                </Link>
+                                </td>
+
+
+                                {/*<td>*/}
+                                {/*    <button className="btn btn-danger " type="submit" name="delete"*/}
+                                {/*            value="${orderItem.order_id}">Slet*/}
+                                {/*    </button>*/}
+                                {/*</td>*/}
+                            </tr>)))
 
 
                     : (<tr>
-                        <td> no conferences registered"</td>
+                        <tr><td> no conferences registered" </td></tr>
                     </tr>)}
                 </tbody>
             </Table>
