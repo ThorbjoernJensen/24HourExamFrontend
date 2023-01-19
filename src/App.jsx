@@ -4,12 +4,20 @@ import Home from "./pages/Home.jsx";
 import facade from "./apiFacade";
 import Header from "./components/Header.jsx";
 import SignUp from "./components/SignUp.jsx";
+import Conferences from "./pages/Conferences";
 
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [loginMessage, setLoginMessage] = useState("Log in to use the API");
     const [errorMessage, setErrorMessage] = useState("No Errors");
+
+    const [conferences, setConferences] = useState([]);
+
+    const getConferences = async () => {
+        await facade.fetchData("/info/conference", setConferences, "GET", null, setErrorMessage);
+        console.log("fra get Conferences" + conferences);
+    }
 
     return (
         <>
@@ -19,18 +27,18 @@ function App() {
                 <Route path="" element={<Home/>}/>
                 <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn}/>}/>
 
-                {/*<Route path="/boat"*/}
-                {/*       element={*/}
-                {/*           <>*/}
-                {/*               {<h3> Boats </h3>}*/}
-                {/*               {facade.hasUserAccess("admin", loggedIn) ?*/}
-                {/*                   <Boats boats={boats}*/}
-                {/*                          onGetBoats={getBoats}/> :*/}
-                {/*                   ("you must be logged in with admin rights to see boat details")*/}
-                {/*               }*/}
-                {/*           </>*/}
-                {/*       }*/}
-                {/*/>*/}
+                <Route path="/conference"
+                       element={
+                           <>
+
+                               {facade.hasUserAccess("user", loggedIn) ?
+                                   <Conferences conferences={conferences}
+                                          onGetConferences={getConferences}/> :
+                                   ("you must be logged in with user rights to see conference details")
+                               }
+                           </>
+                       }
+                />
                 <Route path="*" element={<h1>Page Not Found !!!!</h1>}/>
             </Routes>
         </>
