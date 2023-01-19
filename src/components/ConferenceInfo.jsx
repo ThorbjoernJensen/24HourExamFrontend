@@ -22,6 +22,7 @@ export default function ConferenceInfo() {
                 </tr>
                 </thead>
                 <tbody>
+
                 {conference.talks.length > 0 ?
                     (conference.talks.map((talk) => (
 
