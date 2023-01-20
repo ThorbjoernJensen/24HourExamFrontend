@@ -3,7 +3,6 @@ import {NavLink} from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import {useLocation} from 'react-router-dom'
 
-
 export default function ConferenceInfo() {
     const location = useLocation()
     const conference = location?.state?.data
@@ -22,10 +21,8 @@ export default function ConferenceInfo() {
                 </tr>
                 </thead>
                 <tbody>
-
                 {conference.talks.length > 0 ?
                     (conference.talks.map((talk) => (
-
                         <tr key={talk.id}>
                             <td>{talk.id}</td>
                             <td>{talk.topic}</td>
@@ -37,11 +34,8 @@ export default function ConferenceInfo() {
                             <td> No talks for this conference</td>
                         </tr>
                     )}
-
-
                 </tbody>
             </Table>
         </div>
     )
-
 }

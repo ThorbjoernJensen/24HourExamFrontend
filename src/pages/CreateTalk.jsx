@@ -8,7 +8,7 @@ function CreateTalk({onCreateTalk, conferences, onGetConferences}) {
     // const init = {topic: "", duration: 0, propslist: "", harbour: {}, owners: []};
     const [newTalk, setNewTalk] = useState(init);
 
-     const onChange = (evt) => {
+    const onChange = (evt) => {
         setNewTalk({...newTalk, [evt.target.id]: evt.target.value})
     }
 
@@ -33,28 +33,13 @@ function CreateTalk({onCreateTalk, conferences, onGetConferences}) {
     );
 
     //talks sorteres fra så newTalk-json passer til TalkDTO'en
-    const reducedConferences = conferences.map(({ talks, ...rest }) => rest)
+    const reducedConferences = conferences.map(({talks, ...rest}) => rest)
 
     function assignConference(newValue) {
         //
         const chosenConference = reducedConferences.find((conference) => conference.name === newValue);
         setConference(chosenConference);
-        console.log("conference")
-        console.log(conference)
-        console.log("chosen")
-        console.log(chosenConference)
         setNewTalk({...newTalk, conference: chosenConference})
-
-        console.log("newTalk");
-        console.log(newTalk);
-
-
-        // setTasks(
-        //     tasks.map((task) =>
-        //         task.id === id ? { ...task, reminder: data.reminder } : task
-        //     )
-
-        //Hvorfor logger den et skridt forsinket?
 
     }
 
@@ -70,7 +55,6 @@ function CreateTalk({onCreateTalk, conferences, onGetConferences}) {
                            value={newTalk.duration}/>
                     <input onChange={onChange} type="text" placeholder="propslist" id="propsList"
                            value={newTalk.propsList}/>
-
 
                     <div>
                         <Autocomplete className="drop-down"
@@ -90,16 +74,11 @@ function CreateTalk({onCreateTalk, conferences, onGetConferences}) {
 
                                       id="controllable-states-demo"
                                       options={conferenceNames}
-                            // keykey={harbour.id}
                                       sx={{width: 300}}
                                       renderInput={(params) => <TextField {...params} />}
                         />
-                        {/*{harbour ?*/}
-                        {/*    (<p>Name: {harbour.name}</p>)*/}
-                        {/*    : <h3> No boats in this harbour </h3>}*/}
                     </div>
                     <button onClick={onSubmit} type="submit">Create Talk</button>
-
                 </form>
             </div>
         </div>

@@ -48,7 +48,4 @@ function SignUp({setLoggedIn}) {
     );
 }
 
-
-//TODO besked om at man er oprettet
-
 export default SignUp;

@@ -7,9 +7,6 @@ function Speakers({speakers, onGetSpeakers}) {
     const [SpeakerId, setSpeakerId] = useState("Choose speaker");
     const [inputValue, setInputValue] = React.useState("");
     const [speaker, setSpeaker] = useState({})
-
-    // const [isLoggedIn, setIsLoggedIn] = useState(true);
-
     const speakerNames = speakers.map((speaker) => speaker.name);
 
     useEffect(() => {
@@ -22,16 +19,11 @@ function Speakers({speakers, onGetSpeakers}) {
         const chosenSpeaker = speakers.find((speaker) => speaker.name === newValue);
         setTimeout(function delay() {
             setSpeaker(chosenSpeaker)
-            console.log(speaker);
         }, 100);
         ;
-        console.log(chosenSpeaker);
-
     }
 
-
     return (
-        // <div className="container">
         <div className="mainContent">
             <h3> Speakers </h3>
 
@@ -50,7 +42,6 @@ function Speakers({speakers, onGetSpeakers}) {
                           }}
                           id="controllable-states-demo"
                           options={speakerNames}
-                // keykey={speaker.id}
                           sx={{width: 300}}
                           renderInput={(params) => <TextField {...params} />}
             />
@@ -58,14 +49,11 @@ function Speakers({speakers, onGetSpeakers}) {
             {
                 speaker &&
                 <div>
-
                     <div key={speaker.id}>
                         <p>Name: {speaker.name}</p>
                         <p>Profession: {speaker.profession}</p>
                         <p>Gender: {speaker.gender}</p>
-
                         <p>Talks with this speaker: </p>
-
                         <Table striped bordered hover size="sm">
                             <thead>
                             <tr>
@@ -75,10 +63,8 @@ function Speakers({speakers, onGetSpeakers}) {
                             </tr>
                             </thead>
                             <tbody>
-
                             {speaker.talks && speaker.talks.length !== 0 && speaker.talks.constructor !== Object ?
                                 (speaker.talks.map((talk) => (
-
                                     <tr key={talk.id}>
                                         <td>{talk.id}</td>
                                         <td>{talk.topic}</td>
@@ -90,19 +76,12 @@ function Speakers({speakers, onGetSpeakers}) {
                                         <td> No talks for by this speaker</td>
                                     </tr>
                                 )}
-
-
                             </tbody>
                         </Table>
-
-
-
-
                     </div>
                 </div>
             }
         </div>
     )
 }
-
 export default Speakers;

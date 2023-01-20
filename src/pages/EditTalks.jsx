@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 function EditTalks({onUpdateTalk, onDeleteTask}) {
     const location = useLocation()
     const talk = location?.state?.data
-
     const [updatedTalk, setupdatedTalk] = useState(talk);
 
     const onChange = (evt) => {
@@ -19,13 +18,11 @@ function EditTalks({onUpdateTalk, onDeleteTask}) {
         onUpdateTalk(updatedTalk);
 
     }
+
     const onDelete = (evt) => {
         evt.preventDefault();
         onDeleteTask(updatedTalk);
-
     }
-
-
 
     return (
         <div className="mainContent">

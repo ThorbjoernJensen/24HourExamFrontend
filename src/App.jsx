@@ -16,12 +16,9 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [loginMessage, setLoginMessage] = useState("Log in to use the API");
     const [errorMessage, setErrorMessage] = useState("No Errors");
-
     const [conferences, setConferences] = useState([]);
     const [conference, setConference] = useState({});
-
     const [talks, setTalks] = useState([]);
-
     const [speakers, setSpeakers] = useState([]);
 
     const getConferences = async () => {
@@ -36,24 +33,21 @@ function App() {
 
     const getSpeakers = async () => {
         await facade.fetchData("/info/speaker", setSpeakers, "GET", null, setErrorMessage);
-        // console.log(speakers);
+
     }
 
     const createTalk = async (newTalk) => {
-        console.log("create talk")
-        console.log(newTalk)
+
         await facade.fetchData("/info/talk", () => alert("Talk created"), "POST", newTalk, setErrorMessage);
     }
 
     const updateTalk = async (updatedTalk) => {
-        console.log("updated talk")
-        console.log(updatedTalk)
+
         await facade.fetchData("/info/talk", () => alert("Talk updated"), "PUT", updatedTalk, setErrorMessage);
     }
 
     const deleteTalk = async (updatedTalk) => {
-        console.log("updated talk")
-        console.log(updatedTalk)
+
         await facade.fetchData("/info/talk", () => alert("Talk deleted"), "DELETE", updatedTalk, setErrorMessage);
     }
 

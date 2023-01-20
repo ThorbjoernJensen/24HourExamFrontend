@@ -5,20 +5,11 @@ import LoggedIn from "./LoggedIn.jsx";
 import "../styles/header.css";
 
 function Header({loggedIn, setLoggedIn, setLoginMessage, loginMessage, setErrorMessage}) {
-    console.log("loginstatus: " + loggedIn)
+
     return (
         <nav className="topnav">
             <div className="topnavLeft">
-                {/*<p id="welcomeUser">{loggedIn ? ( "Logged in as" ) : "Welcome"}</p>*/}
                 <p> {loginMessage} </p>
-
-                {/*{facade.hasUserAccess('user', loggedIn) && (*/}
-                {/*    <li>*/}
-                {/*        <NavLink activeClassName="active" to="/jokes">*/}
-                {/*            Jokes*/}
-                {/*        </NavLink>*/}
-                {/*    </li>*/}
-                {/*)}*/}
             </div>
 
             <div className="topnavMid">
@@ -34,10 +25,7 @@ function Header({loggedIn, setLoggedIn, setLoginMessage, loginMessage, setErrorM
                 <NavLink className="" to="/speaker">
                     <i className="fa fa-fw fa-home"></i> Speakers
                 </NavLink>
-
-
             </div>
-
             <div className="topnavRight">
                 {!loggedIn ? (
                     <Login setLoggedIn={setLoggedIn} setLoginMessage={setLoginMessage}

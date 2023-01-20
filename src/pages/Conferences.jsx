@@ -10,13 +10,12 @@ function Conferences({conferences, onGetConferences}) {
         onGetConferences();
 
     }, []);
-    console.log(conferences);
 
     function onSetConference(conference) {
         // console.log("conferenceid vi sender med")
         // console.log(conference.id)
         // setConference(conference);
-        console.log(conference)
+
     };
 
     return (
@@ -38,8 +37,6 @@ function Conferences({conferences, onGetConferences}) {
                             <tr key={conference.id}>
                                 <td>{conference.id}</td>
                                 <td>{conference.name}</td>
-
-
                                 <td>{conference.location}</td>
                                 <td>{conference.capacity}</td>
                                 <td>{conference.date}</td>
@@ -49,22 +46,14 @@ function Conferences({conferences, onGetConferences}) {
                                     Info
                                 </Link>
                                 </td>
-
-
-
                             </tr>)))
-
-
                     : (<tr>
                         <tr><td> no conferences registered" </td></tr>
                     </tr>)}
                 </tbody>
             </Table>
         </div>
-
     )
-
-
 }
 
 export default Conferences;
