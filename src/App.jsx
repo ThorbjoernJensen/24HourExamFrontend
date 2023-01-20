@@ -7,6 +7,8 @@ import SignUp from "./components/SignUp.jsx";
 import ConferenceInfo from "./components/ConferenceInfo.jsx";
 import Conferences from "./pages/Conferences.jsx";
 import Speakers from "./pages/Speakers.jsx";
+import Talks from "./pages/Talks.jsx";
+import CreateTalk from "./pages/CreateTalk.jsx";
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
     const [conferences, setConferences] = useState([]);
     const [conference, setConference] = useState({});
 
+    const [talks, setTalks] = useState([]);
+
     const [speakers, setSpeakers] = useState([]);
 
     const getConferences = async () => {
@@ -24,9 +28,20 @@ function App() {
         // console.log("fra get Conferences" + conferences);
     }
 
+    const getTalks = async () => {
+        await facade.fetchData("/info/talk", setTalks, "GET", null, setErrorMessage);
+        console.log("fra get Talks" + conferences);
+    }
+
     const getSpeakers = async () => {
         await facade.fetchData("/info/speaker", setSpeakers, "GET", null, setErrorMessage);
         // console.log(speakers);
+    }
+
+    const createTalk = async (newTalk) => {
+        console.log("create talk")
+        console.log(newTalk)
+        await facade.fetchData("/info/talk", ()=>alert("Talk created"), "POST", newTalk, setErrorMessage);
     }
 
 
@@ -51,12 +66,37 @@ function App() {
                            </>
                        }
                 />
+
+                <Route path="/talk"
+                       element={
+                           <>
+                               {facade.hasUserAccess("user", loggedIn) ?
+                                   <Talks talks={talks}
+                                             onGetTalks={getTalks}/> :
+                                   ("you must be logged in with user rights to see talks-info")
+                               }
+                           </>
+                       }
+                />
+
                 <Route path="/speaker"
                        element={
                            <>
                                {facade.hasUserAccess("user", loggedIn) ?
                                    <Speakers speakers={speakers}
                                              onGetSpeakers={getSpeakers}/> :
+                                   ("you must be logged in with user rights to see speaker info")
+                               }
+                           </>
+                       }
+                />
+                <Route path="/createtalk"
+                       element={
+                           <>
+                               {facade.hasUserAccess("user", loggedIn) ?
+                                   // onCreateTalk, conferences, onGetConferences
+                                   <CreateTalk onCreateTalk={createTalk} conferences={conferences}
+                                             onGetConferences={getConferences}/> :
                                    ("you must be logged in with user rights to see speaker info")
                                }
                            </>

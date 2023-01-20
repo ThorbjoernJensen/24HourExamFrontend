@@ -28,6 +28,9 @@ function Header({loggedIn, setLoggedIn, setLoginMessage, loginMessage, setErrorM
                 <NavLink className="" to="/conference">
                     <i className="fa fa-fw fa-home"></i> Conferences
                 </NavLink>
+                <NavLink className="" to="/talk">
+                    <i className="fa fa-fw fa-home"></i> Talks
+                </NavLink>
                 <NavLink className="" to="/speaker">
                     <i className="fa fa-fw fa-home"></i> Speakers
                 </NavLink>
