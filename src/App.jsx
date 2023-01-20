@@ -8,7 +8,7 @@ import ConferenceInfo from "./components/ConferenceInfo.jsx";
 import Conferences from "./pages/Conferences.jsx";
 import Speakers from "./pages/Speakers.jsx";
 import Talks from "./pages/Talks.jsx";
-import TalksAdmin from "./pages/TalksAdmin.jsx";
+import EditTalks from "./pages/EditTalks.jsx";
 import CreateTalk from "./pages/CreateTalk.jsx";
 
 
@@ -45,6 +45,14 @@ function App() {
         await facade.fetchData("/info/talk", () => alert("Talk created"), "POST", newTalk, setErrorMessage);
     }
 
+    const updateTalk = async (updatedTalk) => {
+        console.log("updated talk")
+        console.log(updatedTalk)
+        await facade.fetchData("/info/talk", () => alert("Talk updated"), "PUT", updatedTalk, setErrorMessage);
+    }
+
+
+
 
     return (
         <>
@@ -74,27 +82,23 @@ function App() {
                                {
                                    (facade.hasUserAccess("user", loggedIn) || facade.hasUserAccess("admin", loggedIn)) ?
                                        <Talks facade={facade} loggedIn={loggedIn}
-                                           talks={talks}
+                                              talks={talks}
                                               onGetTalks={getTalks}/> :
                                        ("you must be logged in to see talks-info")
                                }
 
 
-                               {/*{() => {*/}
-                               {/*    if (facade.hasUserAccess("admin", loggedIn)) {*/}
-                               {/*        return (<TalksAdmin talks={talks}*/}
-                               {/*                            onGetTalks={getTalks}/>)*/}
-                               {/*    } else {*/}
-                               {/*        if (facade.hasUserAccess("user", loggedIn)) {*/}
-                               {/*            return (<Talks talks={talks} onGetTalks={getTalks}/>)*/}
-                               {/*        } else {*/}
-                               {/*            return <h2>you must be logged in to see talks-info</h2>*/}
-                               {/*        }*/}
-                               {/*    }*/}
-                               {/*}}*/}
-
                            </>
                        }
+                />
+                <Route path="/edittalk/:id" element={
+                    <>
+                        {
+                            facade.hasUserAccess("user", loggedIn) &&
+                            (<EditTalks onUpdateTalk={updateTalk}/>)
+                        }
+                    </>
+                }
                 />
 
                 <Route path="/speaker"

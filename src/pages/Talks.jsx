@@ -49,10 +49,18 @@ function Talks({facade, talks, onGetTalks, loggedIn}) {
                             <td>{talk.id}</td>
                             <td>{talk.topic}</td>
                             <td>{talk.duration}</td>
-                            <td>edit</td>
+
+                            <td><Link key={talk.id} to={"/edittalk/" + talk.id}
+                                      state={{data: talk}}>
+                                Edit
+                            </Link>
+                            </td>
+
                             <td>delete</td>
                         </tr>
                     )))
+
+
                     : (
                         <tr>
                             <td> No talks found</td>

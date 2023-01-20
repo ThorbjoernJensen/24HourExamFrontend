@@ -51,11 +51,7 @@ function Conferences({conferences, onGetConferences}) {
                                 </td>
 
 
-                                {/*<td>*/}
-                                {/*    <button className="btn btn-danger " type="submit" name="delete"*/}
-                                {/*            value="${orderItem.order_id}">Slet*/}
-                                {/*    </button>*/}
-                                {/*</td>*/}
+
                             </tr>)))
 
 
