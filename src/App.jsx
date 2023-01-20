@@ -51,6 +51,11 @@ function App() {
         await facade.fetchData("/info/talk", () => alert("Talk updated"), "PUT", updatedTalk, setErrorMessage);
     }
 
+    const deleteTalk = async (updatedTalk) => {
+        console.log("updated talk")
+        console.log(updatedTalk)
+        await facade.fetchData("/info/talk", () => alert("Talk deleted"), "DELETE", updatedTalk, setErrorMessage);
+    }
 
 
 
@@ -95,7 +100,7 @@ function App() {
                     <>
                         {
                             facade.hasUserAccess("user", loggedIn) &&
-                            (<EditTalks onUpdateTalk={updateTalk}/>)
+                            (<EditTalks onUpdateTalk={updateTalk} onDeleteTask={deleteTalk}/>)
                         }
                     </>
                 }

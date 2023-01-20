@@ -37,7 +37,7 @@ function Talks({facade, talks, onGetTalks, loggedIn}) {
                     <th>Topic</th>
                     <th>Duration</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -56,7 +56,7 @@ function Talks({facade, talks, onGetTalks, loggedIn}) {
                             </Link>
                             </td>
 
-                            <td>delete</td>
+
                         </tr>
                     )))
 
