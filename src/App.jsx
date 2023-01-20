@@ -8,6 +8,7 @@ import ConferenceInfo from "./components/ConferenceInfo.jsx";
 import Conferences from "./pages/Conferences.jsx";
 import Speakers from "./pages/Speakers.jsx";
 import Talks from "./pages/Talks.jsx";
+import TalksAdmin from "./pages/TalksAdmin.jsx";
 import CreateTalk from "./pages/CreateTalk.jsx";
 
 
@@ -41,7 +42,7 @@ function App() {
     const createTalk = async (newTalk) => {
         console.log("create talk")
         console.log(newTalk)
-        await facade.fetchData("/info/talk", ()=>alert("Talk created"), "POST", newTalk, setErrorMessage);
+        await facade.fetchData("/info/talk", () => alert("Talk created"), "POST", newTalk, setErrorMessage);
     }
 
 
@@ -70,11 +71,28 @@ function App() {
                 <Route path="/talk"
                        element={
                            <>
-                               {facade.hasUserAccess("user", loggedIn) ?
-                                   <Talks talks={talks}
-                                             onGetTalks={getTalks}/> :
-                                   ("you must be logged in with user rights to see talks-info")
+                               {
+                                   (facade.hasUserAccess("user", loggedIn) || facade.hasUserAccess("admin", loggedIn)) ?
+                                       <Talks facade={facade} loggedIn={loggedIn}
+                                           talks={talks}
+                                              onGetTalks={getTalks}/> :
+                                       ("you must be logged in to see talks-info")
                                }
+
+
+                               {/*{() => {*/}
+                               {/*    if (facade.hasUserAccess("admin", loggedIn)) {*/}
+                               {/*        return (<TalksAdmin talks={talks}*/}
+                               {/*                            onGetTalks={getTalks}/>)*/}
+                               {/*    } else {*/}
+                               {/*        if (facade.hasUserAccess("user", loggedIn)) {*/}
+                               {/*            return (<Talks talks={talks} onGetTalks={getTalks}/>)*/}
+                               {/*        } else {*/}
+                               {/*            return <h2>you must be logged in to see talks-info</h2>*/}
+                               {/*        }*/}
+                               {/*    }*/}
+                               {/*}}*/}
+
                            </>
                        }
                 />
@@ -96,7 +114,7 @@ function App() {
                                {facade.hasUserAccess("user", loggedIn) ?
                                    // onCreateTalk, conferences, onGetConferences
                                    <CreateTalk onCreateTalk={createTalk} conferences={conferences}
-                                             onGetConferences={getConferences}/> :
+                                               onGetConferences={getConferences}/> :
                                    ("you must be logged in with user rights to see speaker info")
                                }
                            </>
